@@ -1,0 +1,14 @@
+<h2>My Lists</h2>
+<ul class="lists">
+  <li *ngFor="let list of lists"
+    [class.selected]="list === selectedList"
+    (click)="onSelect(list)">
+    <span class="badge">{{list.id}}</span> {{list.name}}
+  </li>
+</ul>
+<div *ngIf="selectedList">
+  <h2>
+    {{selectedList.name | uppercase}} Details 
+  </h2>
+  <button (click)="gotoDetail()">Edit List</button>
+</div>
