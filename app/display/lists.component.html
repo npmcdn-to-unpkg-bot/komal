@@ -1,3 +1,18 @@
+<div *ngIf="lists && lists.length >0">
+<br><br><label style="font-size: 18px;">Statistics:</label>
+ {{done(lists)}} 
+  <button type="button">
+     All Todo <span>{{lists.length}}</span>
+ </button>
+ 
+ <button type="button">
+     Rest <span>{{lists.length-completed.length}}</span>
+ </button>
+ 
+ <button type="button">
+     Completed <span>{{completed.length}}</span>
+ </button> 
+
 <h2>My Lists</h2>
 <ul class="lists">
   <li *ngFor="let list of lists"
@@ -14,3 +29,5 @@
   </h2>
   <button (click)="gotoDetail()">Edit List</button>
 </div>
+</div>
+

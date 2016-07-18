@@ -1,0 +1,10 @@
+<div *ngIf="list">
+  <h2>{{list.name}} details!</h2>
+  <div>
+    <label>id: </label>{{list.id}}</div>
+  <div>
+    <label>name: </label>
+    <input [(ngModel)]="list.name" placeholder="name" />
+  </div>
+  <button (click)="goBack()">Back</button>
+</div>

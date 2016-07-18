@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouteParams } from '@angular/router-deprecated';
 
 import { VARIABLE } from '../VARIABLE';
-import { ListService } from '../display/list.service';
+import { ListService } from './display/list.service';
 
 @Component({
   selector: 'my-list-detail',
