@@ -1,8 +1,9 @@
-import { Component, OnInit,OnChanges } from '@angular/core';
+import { Component, OnInit,OnChanges,Input  } from '@angular/core';
 import { Router } from '@angular/router-deprecated';
 
 import { VARIABLE } from '../variable';
 import { ListService } from './list.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'my-lists',
@@ -10,13 +11,17 @@ import { ListService } from './list.service';
   styleUrls:  ['app/display/lists.component.css']
 })
 export class ListsComponent implements OnInit,OnChanges {
-  lists: VARIABLE[];
+  
   selectedList: VARIABLE;
-  test : Boolean = false;
+  @Input() lists: VARIABLE[];
+    to_do: VARIABLE[];
+     completed: VARIABLE[];
 ngOnChanges(){}
   constructor(
     private _router: Router,
-    private _listService: ListService) { }
+    private _listService: ListService) {
+      this.getLists();
+     }
 
   getLists() {
     this._listService.getLists().then(lists => this.lists = lists);
@@ -32,18 +37,13 @@ ngOnChanges(){}
     this._router.navigate(['ListDetail', { id: this.selectedList.id }]);
   }
   markTodo($event: any, list: VARIABLE) {
- 
-         if ($event == true) {
-            // console.log("completed");
- 
-             this._listService.markTodo(list);
-             return $event;
-         }
-         else {
-             //console.log("not completed");
-         }
+  this._listService.markTodo(list);
  
      }
+      done(lists) {
+         this.to_do = _.filter(this.lists, { 'complete': false });
+         this.completed = _.filter(this.lists, { 'complete': true })
+      }
 }
 
 
