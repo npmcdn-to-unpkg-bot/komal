@@ -38,7 +38,7 @@ import { ListService } from './display/list.service';
   {
     path: '/display/lists',
     name: 'Lists',
-    component: ListsComponent
+    component: ListsComponent,
     useAsDefault: true
   }
 ])
