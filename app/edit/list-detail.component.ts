@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouteParams } from '@angular/router-deprecated';
 
-import { VARIABLE } from '../VARIABLE';
+import { VARIABLE } from '../variable';
 import { ListService } from '../display/list.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class ListDetailComponent implements OnInit {
   ngOnInit() {
     let id = +this.routeParams.get('id');
     this.listService.getList(id)
-      .then(list => this.list = list);
+      .subscribe(list => this.list = list);
   }
 
   goBack() {
