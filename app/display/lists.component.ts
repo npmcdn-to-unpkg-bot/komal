@@ -27,7 +27,7 @@ ngOnChanges(){}
      }
 
   getLists() {
-    this._listService.getLists().then(lists => this.lists = lists);
+    this._listService.getLists().subscribe(lists => this.lists = lists);
   }
 
   ngOnInit() {
