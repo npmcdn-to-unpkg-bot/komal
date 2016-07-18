@@ -13,6 +13,8 @@ export class ListService {
     return this.getLists()
                .then(lists => lists.filter(list => list.id === id)[0]);
   }
+   markTodo(complete: any){
+         
+         return this.getLists().then(lists => lists.filter(list => list.complete===complete)[0]); 
+     }
 }
-
-
