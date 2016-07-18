@@ -1,23 +1,23 @@
 <div *ngIf="lists && lists.length >0">
 <br><br><label style="font-size: 18px;">Statistics:</label>
  {{done(lists)}} 
-  <button type="button">
-     All Todo <span>{{lists.length}}</span>
+  <button type="button" (filterChange)="updateFilter($event)"  (click)="updateFilter(0)">
+     All Todo <span>{{lists.length }}</span>
  </button>
  
- <button type="button">
+ <button type="button"  (filterChange)="updateFilter($event)" (click)="updateFilter(1)">
      Rest <span>{{lists.length-completed.length}}</span>
  </button>
  
- <button type="button">
+ <button type="button" (filterChange)="updateFilter($event)" (click)="updateFilter(2)">
      Completed <span>{{completed.length}}</span>
  </button> 
 
 <h2>My Lists</h2>
 <ul class="lists">
-  <li *ngFor="let list of lists"
-    [class.selected]="list === selectedList"
-    (click)="onSelect(list)">
+  <li *ngFor="let list of lists" [class.hidden]="canShow(list)" 
+      [class.strike]="list.complete===true"
+      [class.selected]="list === selectedList" (click)="onSelect(list)">
     <span class="badge">{{list.id}}</span> {{list.name}}
        <input type="checkbox"  (ngModelChange)="markTodo($event,list)" [(ngModel)]="list.complete" > <span>{{list.id}}.</span> {{list.text}}
             <span *ngIf="list.complete==true" style="color: blue;">Completed</span>

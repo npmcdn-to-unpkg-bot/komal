@@ -1,4 +1,4 @@
-import { Component, OnInit,OnChanges,Input  } from '@angular/core';
+import { Component, OnInit,OnChanges,Input,Output, EventEmitter  } from '@angular/core';
 import { Router } from '@angular/router-deprecated';
 
 import { VARIABLE } from '../variable';
@@ -13,9 +13,12 @@ import * as _ from 'lodash';
 export class ListsComponent implements OnInit,OnChanges {
   
   selectedList: VARIABLE;
-  @Input() lists: VARIABLE[];
+  @Input('init') lists: VARIABLE[] = [];
+   
     to_do: VARIABLE[];
      completed: VARIABLE[];
+     filterType = 0;
+     @Output('filterChange') filters = new EventEmitter();
 ngOnChanges(){}
   constructor(
     private _router: Router,
@@ -44,6 +47,25 @@ ngOnChanges(){}
          this.to_do = _.filter(this.lists, { 'complete': false });
          this.completed = _.filter(this.lists, { 'complete': true })
       }
-}
+      canShow(list: VARIABLE) {
+         if (this.filterType === 0) {
+            return false;
+         } else if (this.filterType === 1) {
+             if (list.complete) {
+                 return true;
+             }
+         } else if (this.filterType === 2) {
+             if (!list.complete) {
+                 return true;
+             }
+         }
+         return false;
+     }
+     updateFilter(filter_type) {
+         this.filterType = filter_type;
+         this.filters.emit(filter_type);
+     }
+  } 
+
 
 
