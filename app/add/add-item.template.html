@@ -5,15 +5,21 @@
 </div>
 <div>
     <div>
+         <form [ngFormModel]="form" (submit)="onSave(text)">
             
-            <input [(ngModel)]="task"/>
-    </div>
-</div>
-<div>
-    <div>
-        <button  (click)="onSave()" style="padding: 10px;">SAVE</button>
+           <input required="required"  ngControl="text"/>
+           <div *ngIf="text.dirty && !text.valid">
+                 <p class="error" *ngIf="text.errors.required">Todo is required.</p>
+                 <p class="error" *ngIf="text.errors.isString">Todo can't be a number</p>
+             </div>
+             <br>
+            <button type="submit" [disabled]="!form.valid" style="padding: 10px;">SAVE</button>
+             <button (click)="onBack()" style="padding: 10px;">BACK</button>
+         </form>
     </div>
 </div>
 
 
-<button  (click)="onBack()" style="padding: 10px;">BACK</button>
+ 
+         
+     

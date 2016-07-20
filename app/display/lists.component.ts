@@ -8,7 +8,8 @@ import * as _ from 'lodash';
 @Component({
   selector: 'my-lists',
   templateUrl: 'app/display/lists.component.html',
-  styleUrls:  ['app/display/lists.component.css']
+  styleUrls:  ['app/display/lists.component.css'],
+  providers:[ListService]
 })
 export class ListsComponent implements OnInit,OnChanges {
   
