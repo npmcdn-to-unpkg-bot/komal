@@ -11,11 +11,13 @@
  
  <button type="button" (filterChange)="updateFilter($event)" (click)="updateFilter(2)">
      Completed <span>{{completed.length}}</span>
+     
  </button> 
+  <button type="button" (click)="sort()">Sort</button>
 
 <h2>My Lists</h2>
 <ul class="lists">
-  <li *ngFor="let list of lists" [class.hidden]="canShow(list)" 
+  <li *ngFor="let list of lists | sort" [class.hidden]="canShow(list)" 
       [class.strike]="list.complete===true"
       [class.selected]="list === selectedList" (click)="onSelect(list)">
     <span class="badge">{{list.id}}</span> {{list.name}}

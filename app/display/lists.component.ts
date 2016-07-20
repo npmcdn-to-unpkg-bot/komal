@@ -1,15 +1,35 @@
-import { Component, OnInit,OnChanges,Input,Output, EventEmitter  } from '@angular/core';
+import { Component, OnInit,OnChanges,Input,Output, EventEmitter, Pipe  } from '@angular/core';
 import { Router } from '@angular/router-deprecated';
 
 import { VARIABLE } from '../variable';
 import { ListService } from './list.service';
+import { ListDetailComponent } from '../list-detail.component';
 import * as _ from 'lodash';
+@Pipe({
+     name: "sort"
+ })
+ export class SortPipe {
+     transform(array: Array<string>, args: string): Array<string> {
+         array.sort((a: any, b: any) => {
+             if (a < b) {
+                 return -1;
+             } else if (a > b) {
+                 return 1;
+             } else {
+                 return 0;
+             }
+         });
+         return array;
+     }
+ }
 
 @Component({
   selector: 'my-lists',
   templateUrl: 'app/display/lists.component.html',
   styleUrls:  ['app/display/lists.component.css'],
-  providers:[ListService]
+  providers:[ListService],
+   directives: [ListDetailComponent],
+   pipes: [SortPipe]
 })
 export class ListsComponent implements OnInit,OnChanges {
   
@@ -34,6 +54,11 @@ ngOnChanges(){}
   ngOnInit() {
     this.getLists();
   }
+  sort() {
+             this.lists = _.sortBy(this.lists, function(lists) {
+                 return lists.name;
+             })
+     }
 
   onSelect(list: VARIABLE) { this.selectedList = list; }
 

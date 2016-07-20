@@ -27,7 +27,9 @@ System.register(['@angular/core', '../data'], function(exports_1, context_1) {
                 AddItemService.prototype.setItem = function (task) {
                     var obj = {
                         name: task,
-                        id: data_1.DATA.length + 1
+                        id: data_1.DATA.length + 1,
+                        active: false,
+                        complete: false
                     };
                     this.pushItem(obj);
                     return Promise.resolve(obj);

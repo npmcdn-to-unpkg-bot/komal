@@ -8,7 +8,9 @@ export class AddItemService {
     setItem(task: string) {
         let obj = {
             name: task,
-            id: DATA.length + 1
+            id: DATA.length + 1,
+            active:false,
+            complete:false
         };
         this.pushItem(obj);
         return Promise.resolve(obj);

@@ -15,7 +15,7 @@ export class AddItemComponent implements OnInit {
     }
     task:string
     text:Control ;
-    item:VARIABLE[];
+    item:VARIABLE;
     form: ControlGroup;
     constructor(private _addService: AddItemService, private _builder: FormBuilder) {
          this.text = new Control("", Validators.compose([Validators.required, TextValidator.isString])
